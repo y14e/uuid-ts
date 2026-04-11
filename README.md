@@ -1,2 +1,2 @@
-# uuid.js
-JS snippet for generating a UUID.
+# uuid.ts
+TS snippet for generating a UUID.
