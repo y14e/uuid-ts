@@ -5,7 +5,6 @@ export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
-
   return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
 }
 
@@ -13,9 +12,6 @@ const seed = new Uint32Array(1);
 
 function fallback(char: string): string {
   crypto.getRandomValues(seed);
-
   const number = char.charCodeAt(0) - 48;
-  const random = seed[0];
-
-  return (number ^ (random & (15 >> (number / 4)))).toString(16);
+  return (number ^ (seed[0] & (15 >> (number / 4)))).toString(16);
 }
