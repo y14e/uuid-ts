@@ -5,6 +5,7 @@ export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
+
   return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
 }
 
