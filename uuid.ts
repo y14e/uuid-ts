@@ -11,7 +11,7 @@ export function generateUUID(): string {
 
 const seed = new Uint32Array(1);
 
-function fallback(char: string): string {
+function fallback(char: string) {
   crypto.getRandomValues(seed);
   const number = char.charCodeAt(0) - 48;
   const random = seed[0];
