@@ -14,6 +14,11 @@ const seed = new Uint32Array(1);
 function fallback(char: string): string {
   crypto.getRandomValues(seed);
   const number = char.charCodeAt(0) - 48;
-  const random = seed[0] as number;
+  const random = seed[0];
+
+  if (random === undefined) {
+    throw new Error('Unreachable');
+  }
+
   return (number ^ (random & (15 >> (number / 4)))).toString(16);
 }
