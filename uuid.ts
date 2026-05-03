@@ -1,5 +1,23 @@
+/**
+ * uuid.ts
+ *
+ * @version 1.0.0
+ * @author Yusuke Kamiyamane
+ * @license MIT
+ * @copyright Copyright (c) 2026 Yusuke Kamiyamane
+ * @see {@link https://github.com/y14e/uuid-ts}
+ */
+
+// -----------------------------------------------------------------------------
+// [Constants]
+// -----------------------------------------------------------------------------
+
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
 const UUID_PATTERN = /[018]/g;
+
+// -----------------------------------------------------------------------------
+// [APIs]
+// -----------------------------------------------------------------------------
 
 export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
@@ -8,6 +26,10 @@ export function generateUUID(): string {
 
   return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
 }
+
+// -----------------------------------------------------------------------------
+// [Utils]
+// -----------------------------------------------------------------------------
 
 const seed = new Uint32Array(1);
 
