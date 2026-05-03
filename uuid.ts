@@ -19,28 +19,22 @@ const UUID_PATTERN = /[018]/g;
 // [APIs]
 // -----------------------------------------------------------------------------
 
+const seed = new Uint32Array(1);
+
 export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
 
-  return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
-}
+  return UUID_TEMPLATE.replace(UUID_PATTERN, (char: string) => {
+    crypto.getRandomValues(seed);
+    const number = char.charCodeAt(0) - 48;
+    const random = seed[0];
 
-// -----------------------------------------------------------------------------
-// [Utils]
-// -----------------------------------------------------------------------------
+    if (random === undefined) {
+      throw new Error('Unreachable');
+    }
 
-const seed = new Uint32Array(1);
-
-function fallback(char: string) {
-  crypto.getRandomValues(seed);
-  const number = char.charCodeAt(0) - 48;
-  const random = seed[0];
-
-  if (random === undefined) {
-    throw new Error('Unreachable');
-  }
-
-  return (number ^ (random & (15 >> (number / 4)))).toString(16);
+    return (number ^ (random & (15 >> (number / 4)))).toString(16);
+  });
 }
