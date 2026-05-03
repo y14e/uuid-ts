@@ -26,7 +26,7 @@ export function generateUUID(): string {
     return crypto.randomUUID();
   }
 
-  return UUID_TEMPLATE.replace(UUID_PATTERN, (char: string) => {
+  return UUID_TEMPLATE.replace(UUID_PATTERN, (char) => {
     crypto.getRandomValues(seed);
     const number = char.charCodeAt(0) - 48;
     const random = seed[0];
