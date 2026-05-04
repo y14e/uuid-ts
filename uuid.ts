@@ -1,7 +1,7 @@
 /**
  * uuid.ts
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) 2026 Yusuke Kamiyamane
@@ -19,23 +19,25 @@ const UUID_PATTERN = /[018]/g;
 // APIs
 // -----------------------------------------------------------------------------
 
-const seed = new Uint32Array(1);
-
 export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
 
   function fallback(char: string) {
-    crypto.getRandomValues(seed);
-    const number = char.charCodeAt(0) - 48;
-    const random = seed[0];
+    const random = crypto.getRandomValues(new Uint8Array(1))[0];
 
     if (random === undefined) {
       throw new Error('Unreachable');
     }
 
-    return (number ^ (random & (15 >> (number / 4)))).toString(16);
+    return (
+      char === '8'
+        ? (random & 0x3f) | 0x80
+        : char === '4'
+          ? 0x40
+          : random & 0x0f
+    ).toString(16);
   }
 
   return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
