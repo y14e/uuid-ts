@@ -7,25 +7,20 @@
  * @copyright Copyright (c) 2026 Yusuke Kamiyamane
  * @see {@link https://github.com/y14e/uuid-ts}
  */
-
 // -----------------------------------------------------------------------------
 // Constants
 // -----------------------------------------------------------------------------
-
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
 const UUID_PATTERN = /[018]/g;
-
 // -----------------------------------------------------------------------------
 // APIs
 // -----------------------------------------------------------------------------
-
-export function generateUUID(): string {
+export function generateUUID() {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
-
-  function fallback(char: string) {
-    const random = crypto.getRandomValues(new Uint8Array(1))[0] as number;
+  function fallback(char) {
+    const random = crypto.getRandomValues(new Uint8Array(1))[0];
     return (
       char === '8'
         ? (random & 0x3f) | 0x80
@@ -34,6 +29,5 @@ export function generateUUID(): string {
           : random & 0x0f
     ).toString(16);
   }
-
   return UUID_TEMPLATE.replace(UUID_PATTERN, fallback);
 }
