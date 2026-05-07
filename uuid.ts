@@ -25,7 +25,12 @@ export function generateUUID() {
   }
 
   function replacer(match: string) {
-    const random = crypto.getRandomValues(new Uint8Array(1))[0] as number;
+    const random = crypto.getRandomValues(new Uint8Array(1))[0];
+
+    if (random === undefined) {
+      throw new Error('Unreachable');
+    }
+
     return (
       match === '8'
         ? (random & 0x3f) | 0x80
