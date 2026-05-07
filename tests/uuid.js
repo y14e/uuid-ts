@@ -1,10 +1,10 @@
 /**
  * uuid.ts
  *
- * @version 1.0.3
+ * @version 1.0.4
  * @author Yusuke Kamiyamane
  * @license MIT
- * @copyright Copyright (c) 2026 Yusuke Kamiyamane
+ * @copyright Copyright (c) Yusuke Kamiyamane
  * @see {@link https://github.com/y14e/uuid-ts}
  */
 // -----------------------------------------------------------------------------
