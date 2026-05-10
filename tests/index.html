@@ -3,7 +3,25 @@
 <script type="module">
 import { generateUUID } from './uuid.js';
 
-console.log(generateUUID());
+function isUUIDv4(value) {
+  return (
+    typeof value === 'string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      value,
+    )
+  );
+}
+
+const uuids = [];
+
+for (let i = 0; i < 10; i++) {
+  const uuid = generateUUID();
+  uuids.push(uuid);
+}
+
+uuids.forEach((uuid, index) => {
+  console.log(`UUID ${index + 1}:`, uuid, isUUIDv4(uuid));
+});
 </script>
 </body>
 </html>
