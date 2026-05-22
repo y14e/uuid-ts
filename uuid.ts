@@ -19,12 +19,12 @@ const UUID_PATTERN = /[018]/g;
 // APIs
 // -----------------------------------------------------------------------------
 
-export function generateUUID() {
+export function generateUUID(): string {
   if (typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
 
-  function replacer(match: string) {
+  function replacer(match: string): string {
     const random =
       crypto.getRandomValues(new Uint8Array(1))[0] ??
       Math.floor(Math.random() * 256);
