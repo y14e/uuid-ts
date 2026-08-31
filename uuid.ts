@@ -1,7 +1,7 @@
 /**
  * uuid.ts
  *
- * @version 1.0.5
+ * @version 1.0.6
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
@@ -13,7 +13,7 @@
 // -----------------------------------------------------------------------------
 
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
-const UUID_PATTERN = /[018]/g;
+const UUID_RE = /[018]/g;
 
 // -----------------------------------------------------------------------------
 // APIs
@@ -33,5 +33,5 @@ export function generateUUID(): string {
     );
   }
 
-  return UUID_TEMPLATE.replace(UUID_PATTERN, replacer);
+  return UUID_TEMPLATE.replace(UUID_RE, replacer);
 }
