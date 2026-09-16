@@ -20,8 +20,10 @@ const UUID_RE = /[018]/g;
 // -----------------------------------------------------------------------------
 
 export function generateUUID(): string {
-  if (typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID();
+  const { randomUUID } = crypto;
+
+  if (typeof randomUUID === 'function') {
+    return randomUUID();
   }
 
   function replacer(match: string): string {
