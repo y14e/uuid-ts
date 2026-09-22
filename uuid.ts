@@ -1,23 +1,5 @@
-/**
- * uuid.ts
- *
- * @version 1.0.9
- * @author Yusuke Kamiyamane
- * @license MIT
- * @copyright Copyright (c) Yusuke Kamiyamane
- * @see {@link https://github.com/y14e/uuid-ts}
- */
-
-// -----------------------------------------------------------------------------
-// Constants
-// -----------------------------------------------------------------------------
-
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
 const UUID_RE = /[018]/g;
-
-// -----------------------------------------------------------------------------
-// APIs
-// -----------------------------------------------------------------------------
 
 export function generateUUID(): string {
   const { randomUUID } = crypto;
