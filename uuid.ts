@@ -1,7 +1,9 @@
+type UUID = `${string}-${string}-${string}-${string}-${string}`;
+
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
 const UUID_RE = /[018]/g;
 
-export function generateUUID(): string {
+export function generateUUID(): UUID {
   const { randomUUID } = crypto;
 
   if (typeof randomUUID === 'function') {
@@ -17,5 +19,5 @@ export function generateUUID(): string {
     );
   }
 
-  return UUID_TEMPLATE.replace(UUID_RE, replacer);
+  return UUID_TEMPLATE.replace(UUID_RE, replacer) as UUID;
 }
