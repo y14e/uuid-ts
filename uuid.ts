@@ -1,4 +1,4 @@
-type UUID = `${string}-${string}-${string}-${string}-${string}`;
+type UUID = ReturnType<typeof crypto.randomUUID>;
 
 const UUID_TEMPLATE = '10000000-1000-4000-8000-100000000000';
 const UUID_RE = /[018]/g;
