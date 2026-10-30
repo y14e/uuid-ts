@@ -11,12 +11,8 @@ export function generateUUID(): UUID {
   }
 
   function replacer(match: string): string {
-    const random =
-      crypto.getRandomValues(new Uint8Array(1))[0] ??
-      Math.floor(Math.random() * 256);
-    return (match === '8' ? (random & 0x03) | 0x08 : random & 0x0f).toString(
-      16,
-    );
+    const random = crypto.getRandomValues(new Uint8Array(1))[0] ?? Math.floor(Math.random() * 256);
+    return (match === '8' ? (random & 0x03) | 0x08 : random & 0x0f).toString(16);
   }
 
   return UUID_TEMPLATE.replace(UUID_RE, replacer) as UUID;
